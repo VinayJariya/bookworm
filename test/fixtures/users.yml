@@ -1,5 +1,42 @@
 michael:
   name: Michael Example
   email: michael@example.com
+  contact: 8319069564
+  password_digest: <%= User.digest('password@123') %>
+  admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+archer:
+  name: Sterling Archer
+  email: duchess@example.gov
   contact: 9876543210
-  password_digest: <%= User.digest('password') %>
+  password_digest: <%= User.digest('password@123') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+lana:
+  name: Lana Kane
+  email: hands@example.gov  
+  contact: 9876543210
+  password_digest: <%= User.digest('password@345') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+malory:
+  name: Malory Archer
+  email: boss@example.gov
+  contact: 9876543210
+  password_digest: <%= User.digest('password@456') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  contact: 9876543210
+  password_digest: <%= User.digest('password@789') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+<% end %>
