@@ -17,7 +17,7 @@ class BooksController < ApplicationController
 	end
 
 	def show
-			@books = Book.find_by_id(params[:id])
+		@books = Book.find_by_id(params[:id])
 	end
 
 	def create
@@ -56,6 +56,15 @@ class BooksController < ApplicationController
 		@books = Book.where( user_id: params[:id]).paginate(page: params[:page])
 		@title = User.find_by_id( params[:id]).name
 		@header = "My Books" 			
+	end
+
+	def search_books
+		@books = Book.search do
+			keywords(params[:search])
+			paginate(page: params[:page])
+		end
+		@title = @header = "Search Results - #{params[:search]}"
+
 	end
 
 	

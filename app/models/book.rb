@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+	
   belongs_to :user
 
   validates :name, presence: true
@@ -7,4 +8,9 @@ class Book < ApplicationRecord
   validates :user_id, presence:true
 
   default_scope -> {order(created_at: :desc)}
+
+  searchable do
+    text :name, :author, :description
+  end
+
 end

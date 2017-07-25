@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get   '/custom_books/(:id)', to: 'books#custom_books_index', as: 'custom_books'
 
+  get   '/search/(:search)',   to: 'books#search_books', as: 'search_query'
+
   root 	'static_pages#home'
 
   resources :users
