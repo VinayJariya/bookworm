@@ -1,0 +1,25 @@
+<%= form_for(@book) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :name, class: 'form-control' %>
+	
+	<%= f.label :author %>
+	<%= f.text_field :author, class: 'form-control' %>
+	
+	<%= f.label :description %>
+	<%= f.text_area :description, class: 'form-control' %>
+
+	<div class="radio">
+		<%=	f.radio_button :donate ,1, :checked => true  %> 
+		<%= f.label :donate, "Donate" %>
+	</div>
+
+	<div class="radio">
+		<%=	f.radio_button :donate ,0 %> 
+		<%= f.label :donate, "Sell" %>
+	</div>
+	
+	<%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+<% end %>

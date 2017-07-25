@@ -1,0 +1,19 @@
+season_1:
+  name: "I just ate an orange!"
+  author: "Me"
+  description: "Me"
+  created_at: <%= 10.minutes.ago %>
+
+season_2:
+  name: "Check out the @tauday site by @mhartl: http://tauday.com"
+  author: "Me"
+  description: "Me"
+  created_at: <%= 3.years.ago %>
+
+season_3:
+  name: "Sad cats are sad: http://youtu.be/PKffm2uI4dk"
+  author: "Me"
+  description: "Me"
+  created_at: <%= Time.zone.now %>
+
+

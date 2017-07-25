@@ -1,0 +1,16 @@
+<span class="book-name"><%= link_to(book.name, book_path(book.id)) %></span> belongs to: <span class="book-owner"><%= link_to(User.find(book.user_id).name, user_path(book.user_id))%></span>
+<span class="book-author">Author: <%= book.author %></span>
+<span class="book-des">Description: <%= book.description %></span>
+<span class="timestamp">Posted <%= time_ago_in_words(book.created_at) %> ago.</span>
+<span>For: 
+<% if book.donate? %>
+	Donation
+<% else %>
+	Sale
+<% end %>
+</span>
+<% if current_user?(User.find_by_id(book.user_id))%>
+	<%= link_to( "Edit Book", edit_book_path(book.id)) %>
+	<%= link_to( "Delete Book", book, method: :delete, data: { confirm: "Are you sure?"}) %>
+<% end %>
+

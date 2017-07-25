@@ -1,0 +1,41 @@
+// Place all the styles related to the Books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.books{
+	list-style: none;
+	padding: 0;
+	margin-left: 60px;
+
+	li{
+		padding: 10px 0;
+    	border-top: 1px solid #e8e8e8;
+	}
+}
+
+.book-name,.book-owner{
+	color: blue;
+	font-style: italic;
+	font-size: 150%;
+	text-decoration: underline;
+	text-size: 125%;
+}
+
+.book-author{
+	display: block;
+	font-size: 125%;
+}
+
+.book-des{
+	display: block;
+}
+
+.timestamp {
+    color: gray-light;
+    display: block;
+  }
+
+.paginate{
+  text-align: center;
+  }

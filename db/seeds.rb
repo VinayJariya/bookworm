@@ -20,3 +20,15 @@ User.create!(name:  "Example User",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+
+  users = User.order(:created_at).take(6)
+  50.times do
+    users.each do |user|
+      user.books.create!(name: Faker::Book.title,
+                        author: Faker::Book.author,
+                        description: Faker::HarryPotter.quote,
+                        donate: Faker::Boolean.boolean
+      )
+  end
+end

@@ -101,4 +101,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
   
+  test "dependent books must be destroyed" do
+    @user.save
+    @user.books.create!(name: "TestCase",
+                        author: "Test",
+                        description: "For Testing Purpose")
+    assert_difference 'Book.count', -1 do
+      @user.destroy
+    end
+  end
 end
