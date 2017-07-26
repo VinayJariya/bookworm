@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   get   '/search/(:search)',   to: 'books#search_books', as: 'search_query'
 
+  get   '/otp_verification/(:id)',   to:  'users#otp_verification', as: 'otp_verification'
+
+  post  '/otp_verified', to: 'users#otp_verified'
+
   root 	'static_pages#home'
 
   resources :users

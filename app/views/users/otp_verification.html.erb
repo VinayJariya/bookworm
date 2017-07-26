@@ -1,0 +1,8 @@
+<h1>OTP VERIFICATION</h1>
+
+<%= form_tag("/otp_verified", method: "post") do %>
+  <%= label_tag(:otp, "Enter the otp recieved at #{@contact}") %>
+  <%= text_field_tag(:otp) %>
+  <%= submit_tag("Verify") %>
+  <%= hidden_field_tag :id, @user.id %>
+<% end %>

@@ -1,3 +1,5 @@
+require 'twilio-ruby'
+
 class User < ApplicationRecord
 
 	attr_accessor :remember_token, :activation_token, :reset_token
@@ -24,6 +26,7 @@ class User < ApplicationRecord
 	before_save {email.downcase!}
 
 	has_secure_password
+  has_one_time_password
 
   has_many :books, dependent: :destroy
 
@@ -81,6 +84,19 @@ class User < ApplicationRecord
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  def send_otp
+    puts "Your otp code is - #{self.otp_code}"
+    #account_sid = "AC96f31f269235c5eeee9b209fbd273509"
+    #auth_token = "c212bc23d33aabd038590ee375a5f7b6"
+    #client = Twilio::REST::Client.new account_sid, auth_token
+    #from = "+14158494825"
+    #client.messages.create(
+    #from: from,
+    #to: "+918319069564",
+    #body: "Hey #{self.name}, Monkey party at 6PM. Bring Bananas!"
+    #)
   end
 
 private

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   	if @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
+      redirect_to otp_verification_path(id: @user.id)
   	else
   		render 'new'
   	end
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
     unless @user.activated?
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url and return
+    end
+    unless @user.contact_verified?
+      flash[:info] = "Please verify your contact to activate your account."
+      redirect_to otp_verification_path(id: @user.id) and return
     end
   end
 
@@ -51,6 +55,31 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
     redirect_to users_url
+  end
+
+  def otp_verification
+    @user = User.find_by_id(params[:id])
+    if !@user.contact_verified?
+      @contact = "XXXXXX#{@user.contact[6..9]}"
+      @user.send_otp
+    else
+      flash[:danger] = "Invalid link !!!"
+      redirect_to root_url
+    end
+  end
+
+  def otp_verified
+    @user = User.find_by_id(params[:id])
+    otp = params[:otp]
+    puts otp
+    if @user.authenticate_otp("#{otp}", drift: 300)
+      @user.update_attribute(:contact_verified, true)
+      flash[:success] = "Contact Verified"
+      log_in @user
+      redirect_to @user
+    else
+      redirect_to 'otp_verification'
+    end
   end
 
   private
